@@ -12,8 +12,8 @@ class ImageController extends Controller
     {
         $validatedData = $request->validate([
             'image' => 'bail|required|mimes:jpeg, bmp, png|max:20000',
-            'height' => 'required',
-            'width' => 'required'
+            'height' => 'required|numeric|min:0|not_in:0|max:1000',
+            'width' => 'required|numeric|min:0|not_in:0|max:1000'
         ]);
 
         $file =  $validatedData['image'];
@@ -42,12 +42,16 @@ class ImageController extends Controller
     {
         $path = public_path('thumbnail/') . $filename;
 
-        if(file_exists($path))
+
+
+
+        if(is_file($path))
             return response()->download($path)->deleteFileAfterSend();
-        else {
+        else{
             return response()->json([
-                'message'  => 'file not found'
-            ], 400);
+                'error'  => 'file not found'
+            ], 500);
         }
+
     }
 }
