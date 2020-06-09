@@ -8,14 +8,14 @@ class ImageController extends Controller
 {
     //
     public function resize(Request $request){
-        
-        // validate request here
+
         $validatedData = $request->validate([
-            
-        ]);
-        
-        // resize the image
-        
+
+            'image' => 'bail|required|mimes:jpeg, bmp, png|max:200000',
+            'height' => 'bail|required',
+            'width' => 'bail|required'
+            ]);
+
         return response()->json([
             'message'  => 'resize method hit'
         ], 200);
