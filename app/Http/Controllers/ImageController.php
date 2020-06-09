@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ImageRequest;
 use App\ImageModel;
 
 class ImageController extends Controller
 {
     //
-    public function resize(Request $request)
+    public function resize(ImageRequest $request)
     {
-        $validatedData = $request->validate([
-            'image' => 'bail|required|mimes:jpeg, bmp, png|max:20000',
-            'height' => 'required|numeric|min:0|not_in:0|max:1000',
-            'width' => 'required|numeric|min:0|not_in:0|max:1000'
-        ]);
+        $validatedData = $request->validated();
 
         $file =  $validatedData['image'];
         $width = $validatedData['width'];
