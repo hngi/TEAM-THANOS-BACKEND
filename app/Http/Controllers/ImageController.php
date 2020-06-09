@@ -25,7 +25,7 @@ class ImageController extends Controller
         $filename = $image->resize($file, $height, $width);
 
         $path = public_path('thumbnail/').$filename;
-        
+
         if(file_exists($path))
             return response()->json([
                 'path'  => env('APP_URL', 'http://localhost:8000') . '/api/download/' . $filename
@@ -36,12 +36,12 @@ class ImageController extends Controller
             ], 400);
         }
     }
-    
-    
-    public function download($filename) 
+
+
+    public function download($filename)
     {
         $path = public_path('thumbnail/') . $filename;
-        
+
         if(file_exists($path))
             return response()->download($path)->deleteFileAfterSend();
         else {
