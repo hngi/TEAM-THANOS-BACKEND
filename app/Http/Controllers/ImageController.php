@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Image;
-use Image;
+use App\ImageModel;
 
 class ImageController extends Controller
 {
@@ -18,26 +17,15 @@ class ImageController extends Controller
             'width' => 'bail|required'
             ]);
 
+            $file =  $validatedData['image'];
+            $width = $validatedData['width'];
+            $height = $validatedData['height'];
 
-        # Code to resize images - implements Intervention
+            $image = new ImageModel();
 
-        $image = $request->file('image');
-        $filename = $image->getClientOriginalName();
+            $path = $image->resize($file, $height, $width);
 
-        $image->move(public_path('thumbnail/'), $filename);
-
-        $image_resize = Image::make(public_path('thumbnail/' . $filename));
-        $image_resize->fit($request->get('width'), $request->get('height'));
-        $image_resize->save(public_path('thumbnail/') .$filename);
-
-        # uncomment below to save image to database
-        /* $img = new Image();
-        $img->email = $request->email;
-        $img->image = $filename;
-        $img->save(); */
-        # Code to resize images - implements Intervention
-
-
+            return response()->download($path)->deleteFileAfterSend();
 
 
         return response()->json([
