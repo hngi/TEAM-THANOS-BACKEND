@@ -25,11 +25,16 @@ class ImageController extends Controller
 
             $path = $image->resize($file, $height, $width);
 
+
+
+
+        if(is_file($path))
             return response()->download($path)->deleteFileAfterSend();
+        else{
+            return response()->json([
+                'error'  => 'file not found'
+            ], 500);
+        }
 
-
-        return response()->json([
-            'message'  => 'resize method hit'
-        ], 200);
     }
 }
