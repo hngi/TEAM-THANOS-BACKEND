@@ -13,8 +13,8 @@ class ImageController extends Controller
         $validatedData = $request->validate([
 
             'image' => 'bail|required|mimes:jpeg, bmp, png|max:200000',
-            'height' => 'bail|required',
-            'width' => 'bail|required'
+            'height' => 'required|numeric|min:0|not_in:0|max:1000',
+            'width' => 'required|numeric|min:0|not_in:0|max:1000'
             ]);
 
             $file =  $validatedData['image'];
