@@ -4,7 +4,7 @@ Takes image in parameters, and resizes. Height and width should be between 1 and
 ### Prerequisites
 A Web Browser and Internet Access.
 ## How to Use
-### Method ```Get```
+### Method ```GET```
 Url: https://baseurl/api/dowload{filename}
 Makes file available for download at the specified url
 ### Method ```POST```
