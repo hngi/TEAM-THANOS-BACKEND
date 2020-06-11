@@ -17,5 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::fallback(function () {
+    return response()->json(['error' => 'Not Found!'], 404);
+});
+
 Route::post('/upload','ImageController@resize');
 Route::get('/download/{filename}', 'ImageController@download');
