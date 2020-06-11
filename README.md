@@ -6,7 +6,7 @@ A Web Browser and Internet Access.
 ## How to Use
 ### Method ```GET```
 Url: https://baseurl/api/dowload{filename}
-Makes file available for download at the specified url
+File is made available for download at the specified url
 ### Method ```POST```
 Url: https://baseurl/api/upload
 payload:
@@ -19,7 +19,7 @@ payload:
 * [Laravel] - PHP Framework
 
 ## Authors
-**Team Thano**
+**Team Thanos**
 
 ## Acknowledgments
 HNGi7 Team
