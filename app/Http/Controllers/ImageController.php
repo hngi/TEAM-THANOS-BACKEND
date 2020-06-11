@@ -29,7 +29,7 @@ class ImageController extends Controller
         else {
             return response()->json([
                 'message'  => 'file not found'
-            ], 400);
+            ], 500);
         }
     }
 
@@ -37,9 +37,6 @@ class ImageController extends Controller
     public function download($filename)
     {
         $path = public_path('thumbnail/') . $filename;
-
-
-
 
         if(is_file($path))
             return response()->download($path)->deleteFileAfterSend();
